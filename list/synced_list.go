@@ -97,7 +97,7 @@ func (slist *SyncedList) Len() int {
 
 // Iter returns a chan which output all elements.
 func (slist *SyncedList) Iter() <-chan *list.Element {
-	ch := make(chan *list.Element)
+	ch := make(chan *list.Element, slist.Len())
 	go func() {
 		slist.RLock()
 		for e := slist.queue.Front(); e != nil; e = e.Next() {
